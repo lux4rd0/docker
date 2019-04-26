@@ -1,0 +1,12 @@
+docker pull linuxserver/smokeping
+
+docker create \
+    --name=smokeping \
+    --restart=always \
+    -e PGID=100 -e PUID=1026  \
+    -e TZ=Americas/Chicago \
+    -p 7080:80 \
+    -v /mnt/docker/smokeping/config:/config \
+    -v /mnt/docker/smokeping/data:/data \
+    --restart unless-stopped \
+    linuxserver/smokeping
