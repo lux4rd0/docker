@@ -1,0 +1,14 @@
+docker pull linuxserver/sonarr
+
+docker create \
+    --name sonarr \
+    --restart=always \
+    -p 8989:8989 \
+    -e TZ=Americas/Chicago \
+    -e PGID=100 -e PUID=1026  \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /mnt/docker/sonarr:/config \
+    -v /mnt/video/TV:/tv \
+    -v /mnt/video/M-TV:/m-tv \
+    -v /mnt/nbd/sonarr:/sonarr \
+    linuxserver/sonarr
