@@ -1,0 +1,13 @@
+docker pull linuxserver/sabnzbd
+
+docker create --name=sabnzbd \
+  --restart=always \
+  -v /mnt/docker/sabnzbd:/config \
+  -v /mnt/nbd/SABnzbd/complete:/complete \
+  -v /mnt/nbd/SABnzbd/incomplete:/incomplete \
+  -v /mnt/nbd/sonarr:/sonarr \
+  -v /mnt/nbd/radarr:/radarr \
+  -e TZ=Americas/Chicago \
+  -e PGID=100 -e PUID=1026  \
+  -p 8080:8080 \
+  linuxserver/sabnzbd:latest
