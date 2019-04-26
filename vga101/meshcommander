@@ -1,0 +1,9 @@
+docker pull vga101/meshcommander
+
+docker create --name=meshcommander \
+  --restart=always \
+  -v /mnt/docker/meshcommander:/config \
+  -e TZ=Americas/Chicago \
+  -e PGID=100 -e PUID=1026 \
+  -p 3000:3000 \
+  vga101/meshcommander
