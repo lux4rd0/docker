@@ -1,0 +1,11 @@
+docker pull tautulli/tautulli
+
+docker create \
+  --name=tautulli \
+  --restart=always \
+  -v /mnt/docker/tautulli/config:/config \
+  -v /mnt/docker/tautulli/logs:/plex_logs:ro \
+  -e PGID=100 -e PUID=1026  \
+  -e TZ=America/Chicago \
+  -p 8181:8181 \
+  tautulli/tautulli
