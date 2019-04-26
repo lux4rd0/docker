@@ -1,0 +1,12 @@
+docker create \
+    --name=radarr \
+    --restart=always \
+    -v /mnt/docker/radarr:/config \
+    -v /mnt/video:/mnt/video \
+    -v /mnt/nbd/radarr:/radarr \
+    -v /etc/localtime:/etc/localtime:ro \
+    -e TZ=Americas/Chicago \
+    -e PGID=100 -e PUID=1026  \
+    -p 7878:7878 \
+    -p 9898:9898 \
+    linuxserver/radarr:latest
