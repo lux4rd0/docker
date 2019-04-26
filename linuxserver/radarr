@@ -1,3 +1,5 @@
+docker pull linuxserver/radarr
+
 docker create \
     --name=radarr \
     --restart=always \
