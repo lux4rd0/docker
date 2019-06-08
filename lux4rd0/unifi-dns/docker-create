@@ -1,0 +1,18 @@
+docker create \
+  --name=unifi-dns \
+  --cap-add=NET_ADMIN \
+  -e PUID=100 \
+  -e PGID=1026 \
+  -e PYTHONWARNINGS='ignore:Unverified HTTPS request' \
+  -e DNSMASQ_OPTS='--domain=pulpfree.net --expand-hosts --cache-size=10000 --dns-forward-max=1000' \
+  -e UNIFI_POLL_INTERVAL=60 \
+  -e UNIFI_PASSWORD=<password> \
+  -e UNIFI_USERNAME=<username> \
+  -e UNIFI_BASEURL='https://10.10.0.40:8443' \
+  -e UNIFI_SITE=<encodedsite> \
+  -p 53:53/udp \
+  -p 53:53 \
+  -v /mnt/docker/unifi-dns/config/dnsmasq.hosts:/etc/dnsmasq.hosts \
+  -v /mnt/docker/unifi-dns/config/dnsmasq.d:/etc/dnsmasq.d \
+  --restart unless-stopped \
+  lux4rd0/unifi-dns
