@@ -1,4 +1,4 @@
-docker build -t lux4rd0/minecraft:1.11.0.23 .
+docker build -t lux4rd0/minecraft:1.11.4.2 .
 
 docker run -d --name=minecraft \
     -v '/mnt/docker/minecraft/worlds:/bedrock-server/worlds' \
@@ -7,4 +7,4 @@ docker run -d --name=minecraft \
     --publish 19132:19132/udp \
     --publish 19132:19132 \
     --restart=always \
-    lux4rd0/minecraft:1.11.0.23
+    lux4rd0/minecraft:1.11.4.2
