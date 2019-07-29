@@ -1,10 +1,24 @@
-docker build -t lux4rd0/minecraft:1.11.4.2 .
+docker build --no-cache -t lux4rd0/minecraft:1.12.0.28 -f Dockerfile.1.12.0.28 .
 
-docker run -d --name=minecraft \
-    -v '/mnt/docker/minecraft/worlds:/bedrock-server/worlds' \
-    -v '/mnt/docker/minecraft/server.properties:/bedrock-server/server.properties' \
+docker run -d --name=minecraft-butterbagel \
+    -v '/mnt/docker/minecraft/butterbagel/worlds:/bedrock-server/worlds' \
+    -v '/mnt/docker/minecraft/butterbagel/server.properties:/bedrock-server/server.properties' \
+    -v '/mnt/docker/minecraft/butterbagel/whitelist.json:/bedrock-server/whitelist.json' \
+    -v '/mnt/docker/minecraft/butterbagel/permissions.json:/bedrock-server/permissions.json' \
     --restart=always \
     --publish 19132:19132/udp \
     --publish 19132:19132 \
     --restart=always \
-    lux4rd0/minecraft:1.11.4.2
+    lux4rd0/minecraft:1.12.0.28
+
+
+docker run -d --name=minecraft-butterific \
+    -v '/mnt/docker/minecraft/butterific/worlds:/bedrock-server/worlds' \
+    -v '/mnt/docker/minecraft/butterific/server.properties:/bedrock-server/server.properties' \
+    -v '/mnt/docker/minecraft/butterific/whitelist.json:/bedrock-server/whitelist.json' \
+    -v '/mnt/docker/minecraft/butterific/permissions.json:/bedrock-server/permissions.json' \
+    --restart=always \
+    --publish 19132:19132/udp \
+    --publish 19132:19132 \
+    --restart=always \
+    lux4rd0/minecraft:1.12.0.28
