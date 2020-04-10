@@ -1,0 +1,17 @@
+services:
+  lux4rd0:
+    container_name: minecraft-${MINECRAFT_WORLD}
+    image: docker01.tylephony.com:5000/lux4rd0/minecraft:latest
+    ports:
+    - protocol: udp
+      published: 19132
+      target: 19132
+    - published: 19132
+      target: 19132
+    restart: always
+    volumes:
+    - /mnt/docker/minecraft/${MINECRAFT_WORLD}/worlds:/bedrock-server/worlds:rw
+    - /mnt/docker/minecraft/${MINECRAFT_WORLD}/server.properties:/bedrock-server/server.properties:rw
+    - /mnt/docker/minecraft/${MINECRAFT_WORLD}/whitelist.json:/bedrock-server/whitelist.json:rw
+    - /mnt/docker/minecraft/${MINECRAFT_WORLD}/permissions.json:/bedrock-server/permissions.json:rw
+version: '3.3'
