@@ -1,0 +1,43 @@
+services:
+  telegraf-docker:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-docker
+    image: telegraf
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/docker/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/docker/telegraf.d:/etc/telegraf/telegraf.d:ro
+  telegraf-ping:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-ping
+    image: telegraf
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/ping/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/ping/telegraf.d:/etc/telegraf/telegraf.d:ro
+  telegraf-snmp:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-snmp
+    image: nuntz/telegraf-snmp
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/snmp/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/snmp/telegraf.d:/etc/telegraf/telegraf.d:ro
+  telegraf-sonos:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-sonos
+    image: telegraf
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/sonos/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/sonos/influxdb_sonos.sh:/etc/telegraf/influxdb_sonos.sh:ro
+    - /mnt/docker/telegraf/sonos/telegraf.d:/etc/telegraf/telegraf.d:ro
+version: '3.3'
