@@ -1,0 +1,55 @@
+services:
+  database:
+    environment:
+      POSTGRES_DB: teslamate
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: teslamate
+    image: postgres:12
+    restart: always
+    container_name: teslamate-db
+    volumes:
+    - teslamate-db:/var/lib/postgresql/data:rw
+  grafana:
+    container_name: teslamate-grafana
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: teslamate
+      DATABASE_PASS: secret
+      DATABASE_USER: teslamate
+    image: teslamate/grafana:latest
+    ports:
+    - 3000:3000/tcp
+    restart: always
+    volumes:
+    - teslamate-grafana-data:/var/lib/grafana:rw
+  mosquitto:
+    container_name: teslamate-mosquitto
+    image: eclipse-mosquitto:1.6
+    ports:
+    - 1883:1883/tcp
+    restart: always
+    volumes:
+    - mosquitto-conf:/mosquitto/config:rw
+    - mosquitto-data:/mosquitto/data:rw
+  teslamate:
+    container_name: teslamate
+    cap_drop:
+    - all
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: teslamate
+      DATABASE_PASS: secret
+      DATABASE_USER: teslamate
+      MQTT_HOST: mosquitto
+    image: teslamate/teslamate:latest
+    ports:
+    - 4000:4000/tcp
+    restart: always
+    volumes:
+    - /mnt/docker/teslamate/import:/opt/app/import:rw
+version: '3.0'
+volumes:
+  mosquitto-conf: {}
+  mosquitto-data: {}
+  teslamate-db: {}
+  teslamate-grafana-data: {}
