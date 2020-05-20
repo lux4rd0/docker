@@ -1,0 +1,9 @@
+telegraf-ping:
+  image: telegraf
+  container_name: telegraf-ping
+  command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+  restart: always
+  user: 1000:1000
+  volumes:
+   - /mnt/docker/telegraf/ping/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+   - /mnt/docker/telegraf/ping/telegraf.d:/etc/telegraf/telegraf.d:ro
