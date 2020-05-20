@@ -1,0 +1,13 @@
+services:
+  telegraf-sonos:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-sonos
+    image: telegraf
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/sonos/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/sonos/influxdb_sonos.sh:/etc/telegraf/influxdb_sonos.sh:ro
+    - /mnt/docker/telegraf/sonos/telegraf.d:/etc/telegraf/telegraf.d:ro
+version: '3.3'
