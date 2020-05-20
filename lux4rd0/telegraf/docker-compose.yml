@@ -9,6 +9,16 @@ services:
     volumes:
     - /mnt/docker/telegraf/docker/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     - /mnt/docker/telegraf/docker/telegraf.d:/etc/telegraf/telegraf.d:ro
+  telegraf-ipmi:
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    container_name: telegraf-ipmi
+    image: docker01.tylephony.com:5000/lux4rd0/telegraf-ipmi:latest
+    network_mode: host
+    restart: always
+    user: 1000:1000
+    volumes:
+    - /mnt/docker/telegraf/ipmi/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - /mnt/docker/telegraf/ipmi/telegraf.d:/etc/telegraf/telegraf.d:ro
   telegraf-ping:
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
     container_name: telegraf-ping
