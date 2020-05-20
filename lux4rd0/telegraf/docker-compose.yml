@@ -32,7 +32,7 @@ services:
   telegraf-snmp:
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
     container_name: telegraf-snmp
-    image: nuntz/telegraf-snmp
+    image: docker01.tylephony.com:5000/lux4rd0/telegraf-snmp:latest
     network_mode: host
     restart: always
     user: 1000:1000
